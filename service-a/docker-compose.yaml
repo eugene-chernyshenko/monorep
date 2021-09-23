@@ -6,3 +6,6 @@ services:
     image: local/service-a
     ports:
     - 8080:8080
+    command: java -Dspring.config.additional-location=file:/appconfigs/ -jar /app/demo.jar
+    volumes:
+    - ../configuration/service-a:/appconfigs

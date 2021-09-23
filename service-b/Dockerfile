@@ -8,6 +8,8 @@ RUN mvn clean package
 
 FROM tomcat:9.0-jdk11-temurin
 
+RUN apt update -qq && apt install -y unzip
+
 WORKDIR /usr/local/tomcat
 
 COPY --from=builder /app/target/demo.war ./webapps/

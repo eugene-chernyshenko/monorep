@@ -6,3 +6,7 @@ services:
     image: local/service-b
     ports:
     - 8080:8080
+    command: /entrypoint.sh
+    volumes:
+    - ../configuration/service-b:/appconfigs
+    - ./entrypoint.sh:/entrypoint.sh
