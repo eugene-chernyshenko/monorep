@@ -6,14 +6,13 @@ ADD . .
 
 RUN ./gradlew build
 
-RUN name=$(./gradlew properties | grep ^name | awk '{print $2}') && \
-    version=$(./gradlew properties | grep ^version | awk '{print $2}') && \
-    cp build/libs/$name-$version.jar app.jar
+RUN version=$(./gradlew properties | grep ^version | awk '{print $2}') && \
+    cp "build/libs/demo-${version}.jar" demo.jar
 
 FROM amazoncorretto:11.0.12-alpine
 
 WORKDIR /app
 
-COPY --from=builder /app/app.jar .
+COPY --from=builder /app/demo.jar .
 
-CMD ["java", "-jar", "/app/app.jar"]
+CMD ["java", "-jar", "/app/demo.jar"]
